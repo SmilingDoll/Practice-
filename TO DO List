@@ -1,0 +1,22 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+tasks = []
+
+@app.route('/add_task', methods=['POST'])
+def add_task():
+    task = request.json['task']
+    tasks.append(task)
+    return jsonify({'message': 'Task added successfully'})
+
+@app.route('/delete_task/<int:index>', methods=['DELETE'])
+def delete_task(index):
+    del tasks[index]
+    return jsonify({'message': 'Task deleted successfully'})
+
+@app.route('/tasks')
+def get_tasks():
+    return jsonify(tasks)
+
+if __name__ == '__main__':
+    app.run()
