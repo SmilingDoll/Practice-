@@ -16,3 +16,24 @@ def submit():
 
 if __name__ == '__main__':
     app.run()
+
+
+
+#Handling HTTP Requests:
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # Validate username and password
+        return f'Logged in as {username}'
+    else:
+        return 'Please submit the login form'
+
+if __name__ == '__main__':
+    app.run()
+
